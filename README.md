@@ -54,12 +54,12 @@ To run this Task Manager API locally, follow these steps:
 
 1. **Clone the Repository:**
    ```bash
-   git clone https://github.com/yourusername/your-task-manager-api.git
+   git clone https://github.com/eldad-assaf/task-manager-node-api.git
    ```
 
 2. **Navigate to the Project Directory:**
    ```bash
-   cd your-task-manager-api
+   cd task-manager-node-api
    ```
 
 3. **Install Dependencies:**
