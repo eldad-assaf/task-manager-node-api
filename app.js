@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const port = process.env.PORT || 3000;
 const tasks = require("./routes/tasks");
+const auth = require('./routes/auth')
 const connectDB = require("./db/connect");
 require("dotenv").config();
 const notFound = require("./middleware/not-found");
@@ -12,6 +13,7 @@ app.use(express.json());
 
 //routes
 app.use("/api/v1/tasks", tasks);
+app.use("/api/v1/auth", auth);
 app.use(notFound);
 app.use(errorHandlerMiddleware);
 
