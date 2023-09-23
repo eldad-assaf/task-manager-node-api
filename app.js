@@ -14,6 +14,7 @@ app.use(express.json());
 //routes
 app.use("/api/v1/tasks", tasks);
 app.use("/api/v1/auth", auth);
+
 app.use(notFound);
 app.use(errorHandlerMiddleware);
 
