@@ -50,6 +50,13 @@ userSchema.pre('save', async function (next) {
   }
 });
 
+userSchema.methods.createJWT = function () {
+  console.log('jwt');
+ return jwt.sign({ userId: this._id, name: this.name }, process.env.JWT_SECRET, {
+    expiresIn: process.env.JWT_LIFETIME,
+  });
+};
+
 const User = mongoose.model('User', userSchema);
 
 module.exports = User;

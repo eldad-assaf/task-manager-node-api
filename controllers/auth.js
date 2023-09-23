@@ -1,12 +1,16 @@
-const { CustomAPIError } = require('../errors/custom-error');
+const User = require("../models/User");
+const { StatusCodes } = require("http-status-codes");
+const { BadRequestError, UnauthenticatedError } = require("../errors/index");
 
-const User = require('../models/User');
 
 
-
-const register =  async (req,res) => {
-const user = await User.create({...req.body})
-res.status(201).json({user})
-}
+const register = async (req, res) => {
+    const user = await User.create({ ...req.body });
+    const token = user.createJWT();
+  
+    res
+      .status(StatusCodes.CREATED)
+      .json({ user: { name: user.name }, token: token });
+  };
 
 module.exports = {register}
