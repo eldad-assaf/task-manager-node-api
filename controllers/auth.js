@@ -10,7 +10,7 @@ const register = async (req, res) => {
   
     res
       .status(StatusCodes.CREATED)
-      .json({ user: { name: user.name }, token: token });
+      .json({ user: { name: user.name }, token: token , id:user.id});
   };
 
 module.exports = {register}

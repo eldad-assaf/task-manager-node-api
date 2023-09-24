@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 
 const userSchema = new mongoose.Schema({
@@ -24,6 +25,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
     minlength: 6,
+    
   },
   createdAt: {
     type: Date,
