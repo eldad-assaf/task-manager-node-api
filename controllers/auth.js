@@ -8,7 +8,7 @@ const register = async (req, res) => {
 
   res
     .status(StatusCodes.CREATED)
-    .json({ user: { name: user.name }, token: token, id: user.id });
+    .json({ user: { name: user.name , email : user.email }, token: token, id: user.id });
 };
 
 const login = async (req, res) => {
