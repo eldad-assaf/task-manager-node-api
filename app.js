@@ -6,6 +6,8 @@ const app = express();
 const port = process.env.PORT || 3005;
 const connectDB = require("./db/connect");
 
+//authenticate user 
+const authenticateUser = require('./middleware/authentication');
 
 //routers
 const tasksRouter = require("./routes/tasks");
@@ -18,6 +20,7 @@ app.use(express.static("./public"));
 app.use(express.json());
 
 
+
 //error handler
 const errorHandlerMiddleware = require("./middleware/error-handler");
 const notFound = require("./middleware/not-found");
@@ -26,8 +29,8 @@ const notFound = require("./middleware/not-found");
 
 
 //routes
-app.use("/api/v1/tasks", tasksRouter);
-app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/tasks", authenticateUser,tasksRouter);
+app.use("/api/v1/auth" ,authRouter);
 app.use(notFound);
 app.use(errorHandlerMiddleware);
 
