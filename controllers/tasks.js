@@ -18,8 +18,13 @@ res.status(200).json( transformedTasks );
 });
 
 const createTask = asyncWrapper(async (req, res) => {
+  console.log(req.body);
   const task = await Task.create(req.body);
-  res.status(201).json({ task });
+  console.log(task);
+    // Transform the task object to change '_id' to 'id'
+    const { _id, ...transformedTask } = task.toObject();
+    const responseTask = { id: _id, ...transformedTask };
+  res.status(200).json(responseTask);
 });
 
 const getTask = asyncWrapper(async (req, res, next) => {
