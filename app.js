@@ -29,7 +29,9 @@ const notFound = require("./middleware/not-found");
 
 
 //routes
-app.use("/api/v1/tasks", authenticateUser,tasksRouter);
+//app.use("/api/v1/tasks", authenticateUser,tasksRouter);
+app.use("/api/v1/tasks",tasksRouter);
+
 app.use("/api/v1/auth" ,authRouter);
 app.use(notFound);
 app.use(errorHandlerMiddleware);

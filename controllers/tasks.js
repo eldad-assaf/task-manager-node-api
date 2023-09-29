@@ -3,10 +3,18 @@ const asyncWrapper = require("../middleware/async");
 const { createCustomError } = require("../errors/custom-error");
 
 const getAllTasks = asyncWrapper(async (req, res) => {
+  console.log('getAllTasks');
+
   const tasks = await Task.find({});
-  res.status(201).json({ tasks });
+
+  // Map tasks to change '_id' to 'id'
+  const transformedTasks = tasks.map(task => {
+    const { _id, ...rest } = task.toObject(); // Convert Mongoose document to plain JavaScript object
+    return { id: _id, ...rest }; // Map '_id' to 'id'
+  });
+res.status(200).json( transformedTasks );
   //res.status(201).json({ tasks  , amount: tasks.length});
-  //res.status(201).json({success :true, data: {tasks, nbHits: tasks.length} });
+  //res.status(200).json({success :true, data: {tasks, nbHits: tasks.length} });
 });
 
 const createTask = asyncWrapper(async (req, res) => {
