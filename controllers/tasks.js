@@ -38,12 +38,15 @@ const getTask = asyncWrapper(async (req, res, next) => {
 });
 
 const deleteTask = asyncWrapper(async (req, res) => {
+  console.log(req.params.id);
   const { id: TaskId } = req.params;
   const task = await Task.findOneAndDelete({ _id: TaskId });
   if (!task) {
     return next(createCustomError(`No task with id :  ${id}`, 404));
   }
-  res.status(200).json({ task });
+  const { _id, ...transformedTask } = task.toObject();
+  const responseTask = { id: _id, ...transformedTask };
+  res.status(200).json( responseTask );
 });
 
 const updateTask = asyncWrapper(async (req, res) => {
