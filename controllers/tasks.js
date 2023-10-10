@@ -50,6 +50,7 @@ const deleteTask = asyncWrapper(async (req, res) => {
 });
 
 const updateTask = asyncWrapper(async (req, res) => {
+  console.log('updateTask');
   const { id: TaskId } = req.params;
   console.log(req.body);
 
@@ -57,9 +58,13 @@ const updateTask = asyncWrapper(async (req, res) => {
     new: true,
   });
   if (!task) {
+    console.log('no task');
     return next(createCustomError(`No task with id :  ${id}`, 404));
   }
-  res.status(200).json({ task });
+  console.log('yes task');
+  const { _id, ...transformedTask } = task.toObject();
+  const responseTask = { id: _id, ...transformedTask };
+  res.status(200).json(responseTask);
 });
 
 //this function is temporary and in the rest of the course the 'updateTask' (PATCH and not PUT) will be used
