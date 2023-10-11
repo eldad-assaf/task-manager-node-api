@@ -31,7 +31,7 @@ const login = async (req, res) => {
 
   res
     .status(StatusCodes.OK)
-    .json({ user: { name: user.name }, token: token, id: user.id });
+    .json({ user: { name: user.name , email :user.email }, token: token, id: user.id });
 };
 
 module.exports = { register,login };
