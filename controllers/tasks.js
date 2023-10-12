@@ -5,7 +5,7 @@ const { createCustomError } = require("../errors/custom-error");
 const getAllTasks = asyncWrapper(async (req, res) => {
   console.log('getAllTasks');
 
-  const tasks = await Task.find({});
+  const tasks = await Task.find({ createdBy: req.user.userId });
 
   // Map tasks to change '_id' to 'id'
   const transformedTasks = tasks.map(task => {
@@ -18,7 +18,8 @@ res.status(200).json( transformedTasks );
 });
 
 const createTask = asyncWrapper(async (req, res) => {
-  console.log(req.body);
+  req.body.createdBy = req.user.userId;
+
   const task = await Task.create(req.body);
   console.log(task);
     // Transform the task object to change '_id' to 'id'
@@ -38,6 +39,7 @@ const getTask = asyncWrapper(async (req, res, next) => {
 });
 
 const deleteTask = asyncWrapper(async (req, res) => {
+  
   console.log(req.params.id);
   const { id: TaskId } = req.params;
   const task = await Task.findOneAndDelete({ _id: TaskId });
