@@ -4,33 +4,27 @@ const {
   BadRequestError,
   UnauthenticatedError,
   UserNameError,
+  BadPasswordError
 } = require("../errors/index");
 
 const register = async (req, res) => {
-  const {name,password} = req.body
-  console.log(name);
-  console.log(password);
-
-  //const name = req.body.name;
+  const { name, password } = req.body;
 
   if ((name && name.length < 3) || name.length > 20) {
     throw new UserNameError("Username must be between 3-20 characters");
   }
 
- if (password && password.length < 6) {
-  console.log('password error');
-   throw new BadRequestError("Password must be between 6-15 characters");
+  if (password && password.length < 6) {
+    throw new BadPasswordError("Password must be between 6-15 characters");
   }
   const user = await User.create({ ...req.body });
   const token = user.createJWT();
 
-  res
-    .status(StatusCodes.CREATED)
-    .json({
-      user: { name: user.name, email: user.email },
-      token: token,
-      id: user.id,
-    });
+  res.status(StatusCodes.CREATED).json({
+    user: { name: user.name, email: user.email },
+    token: token,
+    id: user.id,
+  });
 };
 
 const login = async (req, res) => {
@@ -51,13 +45,11 @@ const login = async (req, res) => {
   }
   const token = user.createJWT();
 
-  res
-    .status(StatusCodes.OK)
-    .json({
-      user: { name: user.name, email: user.email },
-      token: token,
-      id: user.id,
-    });
+  res.status(StatusCodes.OK).json({
+    user: { name: user.name, email: user.email },
+    token: token,
+    id: user.id,
+  });
 };
 
 module.exports = { register, login };
