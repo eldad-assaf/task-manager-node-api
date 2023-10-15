@@ -7,11 +7,20 @@ const {
 } = require("../errors/index");
 
 const register = async (req, res) => {
-  const name = req.body.name;
+  const {name,password} = req.body
+  console.log(name);
+  console.log(password);
+
+  //const name = req.body.name;
+
   if ((name && name.length < 3) || name.length > 20) {
     throw new UserNameError("Username must be between 3-20 characters");
   }
 
+ if (password && password.length < 6) {
+  console.log('password error');
+   throw new BadRequestError("Password must be between 6-15 characters");
+  }
   const user = await User.create({ ...req.body });
   const token = user.createJWT();
 
