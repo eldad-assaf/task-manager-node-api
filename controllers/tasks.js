@@ -19,7 +19,7 @@ res.status(200).json( transformedTasks );
 
 const createTask = asyncWrapper(async (req, res) => {
   req.body.createdBy = req.user.userId;
-
+console.log('eldad');
   const task = await Task.create(req.body);
   console.log(task);
     // Transform the task object to change '_id' to 'id'
