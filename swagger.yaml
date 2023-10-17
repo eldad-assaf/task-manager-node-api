@@ -1,0 +1,201 @@
+
+openapi: 3.0.0
+info:
+  title: Task Manager API
+  contact: {}
+  version: '1.0'
+servers:
+  - url: http://localhost:3005/api/v1
+    variables: {}
+paths:
+  /auth/register:
+    post:
+      tags:
+        - Auth
+      summary: Register
+      operationId: Register
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterRequest'
+            example:
+              name: eldad
+              email: eldad@eldad.com
+              password: '111111'
+      responses:
+        '200':
+          description: Success
+      deprecated: false
+      security: []
+  /auth/login:
+    post:
+      tags:
+        - Auth
+      summary: Login
+      operationId: Login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+            example:
+              email: eldad@eldad.com
+              password: '111111'
+      responses:
+        '200':
+          description: Success
+      deprecated: false
+      security: []
+  /tasks:
+    get:
+      tags:
+        - Tasks
+      summary: Get All Tasks
+      operationId: GetAllTasks
+      responses:
+        '200':
+          description: Success
+      deprecated: false
+      security:
+        - bearer: []
+    post:
+      tags:
+        - Tasks
+      summary: Create Task
+      operationId: CreateTask
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTaskRequest'
+            example:
+              name: test2
+      responses:
+        '200':
+          description: Success
+      deprecated: false
+      security:
+        - bearer: []
+  /tasks/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The task ID
+    get:
+      tags:
+        - Tasks
+      summary: Get Single Task
+      operationId: GetSingleTask
+      responses:
+        '200':
+          description: Success
+      deprecated: false
+      security:
+        - bearer: []
+    patch:
+      tags:
+        - Tasks
+      summary: Update Task
+      operationId: UpdateTask
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateTaskRequest'
+            example:
+              name: Eldad assaf2
+              completed: true
+      responses:
+        '200':
+          description: Success
+      deprecated: false
+      security:
+        - bearer: []
+    delete:
+      tags:
+        - Tasks
+      summary: Delete Task
+      operationId: DeleteTask
+      responses:
+        '200':
+          description: Success
+      deprecated: false
+      security:
+        - bearer: []
+components:
+  schemas:
+    RegisterRequest:
+      title: RegisterRequest
+      required:
+        - name
+        - email
+        - password
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        name: eldad
+        email: eldad@eldad.com
+        password: '111111'
+    LoginRequest:
+      title: LoginRequest
+      required:
+        - email
+        - password
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        email: eldad@eldad.com
+        password: '111111'
+    CreateTaskRequest:
+      title: CreateTaskRequest
+      required:
+        - name
+      type: object
+      properties:
+        name:
+          type: string
+      example:
+        name: test2
+    UpdateTaskRequest:
+      title: UpdateTaskRequest
+      required:
+        - name
+        - completed
+      type: object
+      properties:
+        name:
+          type: string
+        completed:
+          type: boolean
+      example:
+        name: Eldad assaf2
+        completed: true
+  securitySchemes:
+    bearer:
+      type: http
+      scheme: bearer
+security: []
+tags:
+  - name: Auth
+    description: Authentication related endpoints
+  - name: Tasks
+    description: Operations related to tasks
+

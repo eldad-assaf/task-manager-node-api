@@ -18,12 +18,14 @@ const { CustomAPIError } = require("../errors");
 const { StatusCodes } = require("http-status-codes");
 
 const errorHandlerMiddleware = (err, req, res, next) => {
-  //console.log(err.message);
-  // console.log(err);
+  console.log(err.message);
+  console.log(err.msg);
+
+   //console.log(err.code);
 
   let customError = {
     statusCode: err.statusCode || StatusCodes.INTERNAL_SERVER_ERROR,
-    msg: err.msg || "Something went wrong, try again later.",
+    msg: err.message || "Something went wrong, try again later.",
   };
 
   if (err instanceof CustomAPIError) {
@@ -33,8 +35,6 @@ const errorHandlerMiddleware = (err, req, res, next) => {
     customError.msg = `Duplicate value entered for ${Object.keys(err.keyValue)} field, please choose another value `;
     customError.statusCode = 400
   }
-
-
 
   return res.status(customError.statusCode).json({ msg: customError.msg });
 };

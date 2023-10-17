@@ -29,6 +29,7 @@ console.log('eldad');
 });
 
 const getTask = asyncWrapper(async (req, res, next) => {
+  console.log('getTask');
   const { id: taskId } = req.params;
   const task = await Task.findOne({ _id: taskId });
   if (!task) {
