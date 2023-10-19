@@ -73,7 +73,7 @@ To run this Task Manager API locally, follow these steps:
    npm start
    ```
 
-The API will start and be accessible at the specified port (default is 3000).
+The API will start and be accessible at the specified port (default is 3005).
 
 ## Api-Docs
 http://localhost:3005/api-docs/
