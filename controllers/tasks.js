@@ -13,8 +13,7 @@ const getAllTasks = asyncWrapper(async (req, res) => {
     return { id: _id, ...rest }; // Map '_id' to 'id'
   });
 res.status(200).json( transformedTasks );
-  //res.status(201).json({ tasks  , amount: tasks.length});
-  //res.status(200).json({success :true, data: {tasks, nbHits: tasks.length} });
+
 });
 
 const createTask = asyncWrapper(async (req, res) => {
@@ -68,7 +67,7 @@ const updateTask = asyncWrapper(async (req, res) => {
   res.status(200).json(responseTask);
 });
 
-//this function is temporary and in the rest of the course the 'updateTask' (PATCH and not PUT) will be used
+
 const editTask = async (req, res) => {
   try {
     const { id: TaskId } = req.params;
