@@ -1,6 +1,4 @@
-Certainly! Here's a README file for your Task Manager API:
 
----
 
 # Task Manager API
 
