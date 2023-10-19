@@ -75,16 +75,11 @@ To run this Task Manager API locally, follow these steps:
 
 The API will start and be accessible at the specified port (default is 3000).
 
-## Contributions
+## Api-Docs
+http://localhost:3005/api-docs/
 
-Contributions and improvements to this project are welcome! If you have suggestions, bug fixes, or feature enhancements, please open a pull request. Be sure to follow Node.js best practices and coding standards.
 
-## Feedback
-
-If you have any feedback, questions, or would like to discuss the technical aspects of this project, please feel free to [open an issue](https://github.com/yourusername/your-task-manager-api/issues) or [contact me](mailto:your.email@example.com).
 
 Thank you for exploring this Task Manager API. I hope you find it insightful and informative, showcasing my technical skills in Node.js API development.
 
 ---
-
-In this README, the focus is on the technical aspects of your Task Manager API, including the project structure, how to run it locally, and how to contribute. Customize it with your specific project details and repository link.
